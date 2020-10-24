@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ ! -e "${PDNS_PATH}db.sqlite" ]]; then
+        echo "SQLite database doesn't exist in $PDNS_PATH directory! Do you want to create it? [y/n]"
+        read CREATE_DB
+        if [[ $CREATE_DB == 'y' || $CREATE_DB == 'yes' || $CREATE_DB == 'Y' || $CREATE_DB == 'YES' ]]; then
+                touch ${PDNS_PATH}db.sqlite
+        fi
+fi

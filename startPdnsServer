@@ -1,0 +1,52 @@
+#!/bin/bash
+
+#Check if db.sqlite file exists in pdns config directory
+checkIfPdnsDatabaseExist
+
+
+# If the exit code from databaseExits is 1 it means that db.sqlite doesn't exist in pdns config directory.
+databaseExists=$?
+
+# Exit from this script if the exist code of the last command is 1
+if [[ $databaseEists -eq 1 ]]; then
+	echo "[ERROR]: Can not start pdns without database!"
+	exit 1
+fi
+
+# Check if pdns.conf file exists in pdns config directory
+checkIfPdnsConfExist
+
+# If the exit code in pdnsConfFileExists is 1 it means that pdns.conf doesn't exist in pdns config directory.
+pdnsConfFileExists=$?
+
+if [[ $pdnsConfFileExists -eq 1 ]]; then
+        echo "[ERROR]: Can not start pdns without config file!"
+        exit 1
+fi
+
+# Check if sqliteschema.sql file exists in pdns config directory
+checkIfPdnsSqliteSchemaExist
+
+# If the exit code from checkIfPdnsSqliteSchemaExist is 1 it means that sqliteschema.sql doesn't exist in pdns config directory.
+pdnsSqliteSchemaExists=$?
+
+if [[ $pdnsSqliteSchemaExists -eq 1 ]]; then
+        echo "[ERROR]: Can not start pdns without sqlite schema file!"
+        exit 1
+fi
+
+# Check if the Data Base schema was initialized
+checkIfDbWasInitialized
+
+# If the exit code in checkIfDbWasInitialized is 1 it means that the database was not initialized
+dbWasInitialized=$?
+
+if [[ dbWasInitialized -eq 1 ]]; then
+	
+	echo "Intializing db.."
+	# Initialize the data base
+	cat ${PDNS_PATH}sqliteschema.sql | sqlite3 ${PDNS_PATH}db.sqlite 
+fi
+
+#Run the command to start the pdns server
+$PDNS_START_COMMAND

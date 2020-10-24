@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Get the number of tables in the database
+nrOfTables=$(sqlite3 ${PDNS_PATH}db.sqlite .tables | wc -w)
+
+# If there are no tables in the db exit with exit code 1
+if [[ $nrOfTables -eq 0 ]]; then
+	exit 1
+fi

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Check if the pdns.conf file is in the pdns_server configuration directory
+if [[ ! -e "${PDNS_PATH}pdns.conf" ]]; then
+        echo "Power DNS configuration file doesn't exist, create it after re-run this command to start the server"
+	exit 1
+fi
+

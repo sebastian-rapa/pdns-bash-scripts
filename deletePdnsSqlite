@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#Delete the pdns data bases
+rm $PDNS_PATH/db.*

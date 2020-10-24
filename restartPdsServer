@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+# Check if any process which contains the pdns run command runs 
+pdnsPids=$(ps -ax | grep "$PDNS_START_COMMAND" |  awk '{print $1}')
+
+echo $pdnsPids
+# Kill any pdns process that runs with
+for i in $pdnsPids; do
+	kill $i
+done
+
+#Start the pdns, use the last script
+startPdnsServer
