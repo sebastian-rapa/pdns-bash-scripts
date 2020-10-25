@@ -43,10 +43,11 @@ dbWasInitialized=$?
 
 if [[ dbWasInitialized -eq 1 ]]; then
 	
-	echo "Intializing db.."
+	echo "[INFO]: Intializing db.."
 	# Initialize the data base
 	cat ${PDNS_PATH}sqliteschema.sql | sqlite3 ${PDNS_PATH}db.sqlite 
 fi
 
 #Run the command to start the pdns server
+echo "[INFO]: Starting Power DNS Server.."
 $PDNS_START_COMMAND
