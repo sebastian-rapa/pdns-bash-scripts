@@ -1,4 +1,10 @@
 #!/bin/bash
 
+# Check if the Enviorment variables are set
+if ! enviormentVariablesAreSet; then
+        echo "Enviorment variables are not set, please set them first!"
+        exit 1
+fi
+
 #Delete the pdns data bases
-rm ${PDNS_CONFIG_DIR_PATH}/db.*
+rm ${PDNS_CONFIG_DIR_PATH}db.*

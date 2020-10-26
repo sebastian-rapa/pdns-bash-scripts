@@ -1,0 +1,5 @@
+#! /bin/bash
+
+if [ -z "${PDNS_CONFIG_DIR_PATH}" -o -z "${PDNS_RUN_COMMAND}" ]; then
+	exit 1
+fi

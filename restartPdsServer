@@ -1,5 +1,12 @@
 #!/bin/bash 
 
+# Check if the Enviorment variables are set
+if ! enviormentVariablesAreSet; then
+	echo "Enviorment variables are not set, please set them first!"
+	exit 1
+fi
+
+
 # Check if any process which contains the pdns run command runs 
 pdnsPids=$(ps -ax | grep "${PDNS_RUN_COMMAND}" |  awk '{print $1}')
 

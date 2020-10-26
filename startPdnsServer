@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Check if the Enviorment variables are set
+if ! enviormentVariablesAreSet; then
+        echo "Enviorment variables are not set, please set them first!"
+        exit 1
+fi
+
+
+
 #Check if db.sqlite file exists in pdns config directory
 databaseFile="${PDNS_CONFIG_DIR_PATH}db.sqlite"
 
