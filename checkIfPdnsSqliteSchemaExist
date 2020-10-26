@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Check if the sqliteschema.sql file is in the pdns_server configuration directory
-if [[ ! -e "${PDNS_PATH}sqliteschema.sql" ]]; then
-        echo "SQLite schema file doesn't exist, create it after re-run this command to start the server"
-        exit 1
-fi
